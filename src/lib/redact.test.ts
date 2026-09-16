@@ -27,7 +27,9 @@ describe("redactPhi", () => {
   });
 
   it("aggregates ages over 89 as required by Safe Harbor", () => {
-    expect(redactPhi("A 93-year-old woman and a 45 year old man").text).toBe("A 90+-year-old woman and a 45 year old man");
+    expect(redactPhi("A 93-year-old woman and a 45 year old man").text).toBe(
+      "A 90+-year-old woman and a 45 year old man",
+    );
   });
 
   it("masks names after honorifics and introductions, numbering distinct people", () => {
@@ -36,7 +38,9 @@ describe("redactPhi", () => {
   });
 
   it("redacts known patient names everywhere, including first or last name alone", () => {
-    const { text } = redactPhi("Thanks Maria. maria said Lopez family history is clear.", { knownNames: ["Maria Lopez"] });
+    const { text } = redactPhi("Thanks Maria. maria said Lopez family history is clear.", {
+      knownNames: ["Maria Lopez"],
+    });
     expect(text).toBe("Thanks [NAME 1]. [NAME 1] said [NAME 2] family history is clear.");
   });
 

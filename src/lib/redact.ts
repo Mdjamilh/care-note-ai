@@ -29,7 +29,11 @@ const RULES: Rule[] = [
   { type: "EMAIL", pattern: /\b[\w.+-]+@[\w-]+(?:\.[\w-]+)+\b/g },
   { type: "URL", pattern: /\bhttps?:\/\/[^\s)]+/g },
   { type: "SSN", pattern: /\b\d{3}-\d{2}-\d{4}\b/g },
-  { type: "MRN", pattern: /\b(?:MRN|medical record(?: number)?|chart (?:number|no\.?))[:#\s]*([A-Z0-9-]{4,})\b/gi, group: 1 },
+  {
+    type: "MRN",
+    pattern: /\b(?:MRN|medical record(?: number)?|chart (?:number|no\.?))[:#\s]*([A-Z0-9-]{4,})\b/gi,
+    group: 1,
+  },
   { type: "PHONE", pattern: /(?<!\w)(?:\+?1[\s.-]?)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}\b/g },
   {
     type: "ADDRESS",
@@ -40,17 +44,42 @@ const RULES: Rule[] = [
   { type: "DATE", pattern: /\b\d{1,2}[/-]\d{1,2}[/-](?:\d{4}|\d{2})\b/g },
   { type: "DATE", pattern: /\b\d{4}-\d{2}-\d{2}\b/g },
   { type: "DATE", pattern: new RegExp(`\\b(?:${MONTHS})\\.?\\s+\\d{1,2}(?:st|nd|rd|th)?(?:,?\\s+\\d{4})?\\b`, "g") },
-  { type: "DATE", pattern: new RegExp(`\\b\\d{1,2}(?:st|nd|rd|th)?\\s+(?:of\\s+)?(?:${MONTHS})(?:,?\\s+\\d{4})?\\b`, "g") },
+  {
+    type: "DATE",
+    pattern: new RegExp(`\\b\\d{1,2}(?:st|nd|rd|th)?\\s+(?:of\\s+)?(?:${MONTHS})(?:,?\\s+\\d{4})?\\b`, "g"),
+  },
   // Safe Harbor: ages over 89 must be aggregated.
   { type: "AGE", pattern: /\b(?:9\d|1[0-1]\d)(?=[- ]?(?:years?|yrs?|y\/o|yo)\b)/gi },
   { type: "NAME", pattern: /\b(?:Mr|Mrs|Ms|Miss|Mx|Dr)\.?\s+((?:[A-Z][a-z'-]+)(?:\s+[A-Z][a-z'-]+)?)/g, group: 1 },
-  { type: "NAME", pattern: /\b(?:[Mm]y name is|[Nn]ame's|I'm|I am|[Tt]his is)\s+([A-Z][a-z'-]+(?:\s+[A-Z][a-z'-]+)?)/g, group: 1 },
+  {
+    type: "NAME",
+    pattern: /\b(?:[Mm]y name is|[Nn]ame's|I'm|I am|[Tt]his is)\s+([A-Z][a-z'-]+(?:\s+[A-Z][a-z'-]+)?)/g,
+    group: 1,
+  },
 ];
 
 const escapeRegExp = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 /** Words that look like names after "I'm"/"this is" but aren't. */
-const NOT_NAMES = new Set(["Dr", "Mr", "Mrs", "Ms", "Miss", "Mx", "Doctor", "Here", "Fine", "Good", "Okay", "Sorry", "Not", "Just", "Still", "Really", "So"]);
+const NOT_NAMES = new Set([
+  "Dr",
+  "Mr",
+  "Mrs",
+  "Ms",
+  "Miss",
+  "Mx",
+  "Doctor",
+  "Here",
+  "Fine",
+  "Good",
+  "Okay",
+  "Sorry",
+  "Not",
+  "Just",
+  "Still",
+  "Really",
+  "So",
+]);
 
 function findMatches(text: string, knownNames: string[]): Omit<Redaction, "replacement">[] {
   const matches: Omit<Redaction, "replacement">[] = [];

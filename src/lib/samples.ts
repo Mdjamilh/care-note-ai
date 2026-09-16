@@ -120,7 +120,12 @@ Doctor: Light duty for a week, no lifting over 20 pounds. I'll give you a note. 
       plan: "No imaging indicated. Naproxen 500 mg twice daily with food for up to 10 days. Continue heat; stay active with gentle walking. Work note for light duty for 1 week, lifting limit 20 lb.",
       medications: [
         { name: "Naproxen", dose: "500 mg", frequency: "twice daily with food, up to 10 days", status: "new" },
-        { name: "Acetaminophen extra strength", dose: "2 tablets", frequency: "a few times daily as needed", status: "continued" },
+        {
+          name: "Acetaminophen extra strength",
+          dose: "2 tablets",
+          frequency: "a few times daily as needed",
+          status: "continued",
+        },
       ],
       followUp: "Refer to physical therapy if not improving within 2 weeks.",
       missingInfo: ["Vital signs not recorded", "NSAID contraindications (kidney disease, ulcers) not asked"],

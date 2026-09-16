@@ -21,7 +21,8 @@ export const metadata: Metadata = {
     default: "CareNote · AI clinical documentation",
     template: "%s · CareNote",
   },
-  description: "Turn visit transcripts into structured, editable SOAP notes, with PHI redaction before anything leaves the app.",
+  description:
+    "Turn visit transcripts into structured, editable SOAP notes, with PHI redaction before anything leaves the app.",
 };
 
 export default function RootLayout({
@@ -36,7 +37,7 @@ export default function RootLayout({
           <SiteHeader />
           <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8 sm:px-6 sm:py-10">{children}</main>
           <footer className="border-t">
-            <div className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-6 text-xs text-muted-foreground sm:flex-row sm:justify-between sm:px-6">
+            <div className="text-muted-foreground mx-auto flex max-w-6xl flex-col gap-1 px-4 py-6 text-xs sm:flex-row sm:justify-between sm:px-6">
               <p>CareNote is a portfolio demo. Use synthetic transcripts only — not for clinical use.</p>
               <p>AI drafts must be reviewed by a clinician before use.</p>
             </div>
