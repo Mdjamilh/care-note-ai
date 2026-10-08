@@ -1,70 +1,92 @@
-import Image from "next/image";
+import {
+  ArrowRightIcon,
+  FileCheck2Icon,
+  FileJsonIcon,
+  ListChecksIcon,
+  ShieldCheckIcon,
+  SparklesIcon,
+} from "lucide-react";
+import Link from "next/link";
 
-export default function Home() {
+import { Button } from "@/components/ui/button";
+import { getGenerator } from "@/server/providers";
+
+const FEATURES = [
+  {
+    icon: ShieldCheckIcon,
+    title: "Redaction first",
+    body: "Names, dates, phone numbers, addresses and record numbers are masked before anything is stored or sent to the model, and you see exactly what was removed.",
+  },
+  {
+    icon: SparklesIcon,
+    title: "Structured SOAP drafts",
+    body: "The model fills a strict schema: subjective, objective, assessment, plan, medications with status, and follow-up. No free-form guessing.",
+  },
+  {
+    icon: ListChecksIcon,
+    title: "Gaps called out",
+    body: "Anything a complete note usually includes but the visit didn't cover is listed for the clinician instead of being invented.",
+  },
+  {
+    icon: FileCheck2Icon,
+    title: "Review, then finalize",
+    body: "Edit every section with autosave. Finalized notes are locked; changes after that are recorded as amendments.",
+  },
+  {
+    icon: FileJsonIcon,
+    title: "Interoperable export",
+    body: "Copy as Markdown or download a FHIR R4 DocumentReference (LOINC 11506-3) for EHR import.",
+  },
+];
+
+export default function HomePage() {
+  const { provider } = getGenerator();
+
   return (
-    <div className="grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-sans sm:p-20">
-      <main className="row-start-2 flex flex-col items-center gap-[32px] sm:items-start">
-        <Image className="dark:invert" src="/next.svg" alt="Next.js logo" width={180} height={38} priority />
-        <ol className="list-inside list-decimal text-center font-mono text-sm/6 sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="rounded bg-black/[.05] px-1 py-0.5 font-mono font-semibold dark:bg-white/[.06]">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex flex-col items-center gap-4 sm:flex-row">
-          <a
-            className="bg-foreground text-background flex h-10 items-center justify-center gap-2 rounded-full border border-solid border-transparent px-4 text-sm font-medium transition-colors hover:bg-[#383838] sm:h-12 sm:w-auto sm:px-5 sm:text-base dark:hover:bg-[#ccc]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image className="dark:invert" src="/vercel.svg" alt="Vercel logomark" width={20} height={20} />
-            Deploy now
-          </a>
-          <a
-            className="flex h-10 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-4 text-sm font-medium transition-colors hover:border-transparent hover:bg-[#f2f2f2] sm:h-12 sm:w-auto sm:px-5 sm:text-base md:w-[158px] dark:border-white/[.145] dark:hover:bg-[#1a1a1a]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="space-y-16">
+      <section className="mx-auto max-w-3xl pt-6 text-center">
+        <p className="bg-card text-muted-foreground mb-5 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium">
+          <span
+            className={provider.id === "demo" ? "bg-warning size-1.5 rounded-full" : "bg-success size-1.5 rounded-full"}
+          />
+          {provider.id === "demo" ? "Demo mode with sample visits" : `Drafting with ${provider.label}`}
+        </p>
+        <h1 className="text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
+          From visit conversation to SOAP note in seconds.
+        </h1>
+        <p className="text-muted-foreground mx-auto mt-4 max-w-2xl text-lg">
+          CareNote drafts structured clinical notes from transcripts, with privacy guardrails and a clinician review
+          step built in.
+        </p>
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
+          <Button size="lg" asChild>
+            <Link href="/new">
+              Start a note <ArrowRightIcon />
+            </Link>
+          </Button>
+          <Button size="lg" variant="outline" asChild>
+            <Link href="/notes">View history</Link>
+          </Button>
         </div>
-      </main>
-      <footer className="row-start-3 flex flex-wrap items-center justify-center gap-[24px]">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image aria-hidden src="/file.svg" alt="File icon" width={16} height={16} />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image aria-hidden src="/window.svg" alt="Window icon" width={16} height={16} />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image aria-hidden src="/globe.svg" alt="Globe icon" width={16} height={16} />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </section>
+
+      <section aria-label="Features" className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {FEATURES.map((feature) => (
+          <div key={feature.title} className="bg-card rounded-xl border p-6">
+            <span className="bg-primary/10 text-primary flex size-10 items-center justify-center rounded-lg">
+              <feature.icon className="size-5" />
+            </span>
+            <h2 className="mt-4 font-semibold">{feature.title}</h2>
+            <p className="text-muted-foreground mt-1 text-sm">{feature.body}</p>
+          </div>
+        ))}
+        <div className="flex flex-col justify-center rounded-xl border border-dashed p-6">
+          <p className="text-muted-foreground text-sm">
+            Built for review, not autopilot. Every draft is labelled as AI-generated and stays a draft until a clinician
+            finalizes it.
+          </p>
+        </div>
+      </section>
     </div>
   );
 }
