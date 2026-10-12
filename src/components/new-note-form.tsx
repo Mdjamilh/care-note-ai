@@ -24,7 +24,7 @@ export function NewNoteForm({ demoMode }: { demoMode: boolean }) {
   const [transcript, setTranscript] = useState("");
   const [isPending, startTransition] = useTransition();
 
-  const useSample = (sample: SampleVisit) => {
+  const applySample = (sample: SampleVisit) => {
     setSampleId(sample.id);
     setTitle(sample.title);
     setPatientName(sample.patientName);
@@ -50,7 +50,7 @@ export function NewNoteForm({ demoMode }: { demoMode: boolean }) {
         <h2 id="samples-heading" className="text-sm font-medium">
           Start from a sample visit
         </h2>
-        <SamplePicker selectedId={sampleId} onSelect={useSample} />
+        <SamplePicker selectedId={sampleId} onSelect={applySample} />
       </section>
 
       {demoMode && (
