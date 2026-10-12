@@ -16,7 +16,8 @@ import { getWorkspaceId } from "@/server/workspace";
 
 export type ActionResult<T = undefined> = { ok: true; data: T } | { ok: false; error: string };
 
-const draftLimiter = createRateLimiter({ limit: 6, windowMs: 60_000 });
+// Drafts per IP per minute; raise DRAFT_RATE_LIMIT for load tests or e2e runs.
+const draftLimiter = createRateLimiter({ limit: Number(process.env.DRAFT_RATE_LIMIT) || 6, windowMs: 60_000 });
 
 function failure(error: unknown): { ok: false; error: string } {
   if (error instanceof NoteError || error instanceof GenerationError) return { ok: false, error: error.message };
