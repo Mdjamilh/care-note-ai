@@ -76,7 +76,7 @@ export function NoteEditor({ note }: { note: NoteDto }) {
           onChange={(e) => setTitle(e.target.value)}
           readOnly={locked}
           maxLength={120}
-          className="focus-visible:border-input h-auto border-transparent px-0 text-2xl font-semibold tracking-tight shadow-none focus-visible:px-3 sm:text-3xl dark:bg-transparent"
+          className="focus-visible:border-input h-auto border-transparent px-0 text-2xl font-semibold tracking-tight shadow-none focus-visible:px-3 sm:text-3xl md:text-3xl dark:bg-transparent"
         />
         <SaveIndicator state={saveState} locked={locked} />
       </div>
