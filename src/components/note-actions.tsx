@@ -90,7 +90,7 @@ export function NoteActions({ note }: { note: NoteDto }) {
           )
         }
       >
-        <FileJsonIcon /> Download FHIR DocumentReference
+        <FileJsonIcon /> Download FHIR JSON
       </Button>
 
       <h2 className="mt-6 mb-3 text-sm font-medium">Review</h2>

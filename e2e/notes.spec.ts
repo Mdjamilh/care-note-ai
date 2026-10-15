@@ -39,7 +39,7 @@ test("draft, edit with autosave, finalize, export and amend a note", async ({ pa
   await expect(page.getByLabel("Plan")).toContainText("Recheck BP in clinic in 4 weeks.");
 
   const download = page.waitForEvent("download");
-  await page.getByRole("button", { name: "Download FHIR DocumentReference" }).click();
+  await page.getByRole("button", { name: "Download FHIR JSON" }).click();
   expect((await download).suggestedFilename()).toBe("blood-pressure-diabetes-follow-up.fhir.json");
 
   await page.getByRole("button", { name: "Finalize note" }).click();
