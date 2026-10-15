@@ -4,7 +4,6 @@ import { AlertTriangleIcon, CheckIcon, CloudOffIcon, Loader2Icon, LockIcon } fro
 import { useCallback, useState } from "react";
 
 import { updateNoteAction } from "@/app/actions";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useAutosave, type SaveState } from "@/hooks/use-autosave";
@@ -70,24 +69,28 @@ export function NoteEditor({ note }: { note: NoteDto }) {
         <Label htmlFor="note-title" className="sr-only">
           Title
         </Label>
-        <Input
+        {/* Textarea rather than input so long titles wrap on small screens. */}
+        <Textarea
           id="note-title"
+          rows={1}
           value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={(e) => setTitle(e.target.value.replace(/\n/g, " "))}
           readOnly={locked}
           maxLength={120}
-          className="focus-visible:border-input h-auto border-transparent px-0 text-2xl font-semibold tracking-tight shadow-none focus-visible:px-3 sm:text-3xl md:text-3xl dark:bg-transparent"
+          className="focus-visible:border-input field-sizing-content min-h-0 flex-1 resize-none border-transparent px-0 py-1 text-2xl font-semibold tracking-tight shadow-none focus-visible:px-3 md:text-3xl dark:bg-transparent"
         />
         <SaveIndicator state={saveState} locked={locked} />
       </div>
 
       <div className="grid gap-2">
         <Label htmlFor="chief-complaint">Chief complaint</Label>
-        <Input
+        <Textarea
           id="chief-complaint"
+          rows={1}
           value={content.chiefComplaint}
-          onChange={(e) => set("chiefComplaint", e.target.value)}
+          onChange={(e) => set("chiefComplaint", e.target.value.replace(/\n/g, " "))}
           readOnly={locked}
+          className="field-sizing-content min-h-9 resize-none"
         />
       </div>
 
