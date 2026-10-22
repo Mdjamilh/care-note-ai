@@ -8,6 +8,8 @@
 
 CareNote turns a doctor–patient visit transcript into a structured, editable **SOAP note**. Identifiers are redacted **before** anything is stored or sent to the model, the draft calls out what the visit didn't cover instead of inventing it, and nothing is final until a clinician reviews and locks it.
 
+**Live demo:** https://carenote-ai-nine.vercel.app (demo mode: pick a sample visit on **New note**)
+
 > Portfolio project. Use synthetic transcripts only. AI drafts must be reviewed by a clinician; not for clinical use.
 
 ![Note editor](docs/screenshots/note-editor.png)
