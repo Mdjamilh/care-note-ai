@@ -1,6 +1,6 @@
 # CareNote: AI Clinical Documentation Assistant
 
-[![CI](https://github.com/Mdjamilh/carenote-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/Mdjamilh/carenote-ai/actions/workflows/ci.yml)
+[![CI](https://github.com/Mdjamilh/care-note-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/Mdjamilh/care-note-ai/actions/workflows/ci.yml)
 ![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)
 ![Claude API](https://img.shields.io/badge/Claude-structured%20output-D97757)
@@ -59,8 +59,8 @@ The raw transcript and the optional patient name exist only for the length of th
 Requires Node.js 20 or newer.
 
 ```bash
-git clone https://github.com/Mdjamilh/carenote-ai.git
-cd carenote-ai
+git clone https://github.com/Mdjamilh/care-note-ai.git
+cd care-note-ai
 npm install
 npm run dev
 ```
